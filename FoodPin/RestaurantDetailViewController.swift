@@ -36,15 +36,41 @@ class RestaurantDetailViewController: UIViewController {
 //        navigationController?.setNavigationBarHidden(false, animated: true)
 //    }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == segue.identifier {
+            let destinationController = segue.destination as! ReviewViewController
+              // Pass the selected object to the new view controller.
+            destinationController.restaurant = restaurant
+        }
     }
-    */
+    
+    
+    @IBAction func close(segue:UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func ratingButtonTapped(segue: UIStoryboardSegue) {
+        guard let rating = segue.identifier else {return}
+        restaurant.isVisited = true
+        
+        switch rating {
+        case "great":
+            restaurant.rating = "Absolutely love it! Must try it."
+        case "good":
+            restaurant.rating = "Pretty good."
+        case "dislike":
+            restaurant.rating = "I don't like it."
+        default:
+            break
+        }
+        
+        tableView.reloadData()
+    }
 
 }
 
@@ -70,7 +96,7 @@ extension RestaurantDetailViewController: UITableViewDataSource {
             cell.valueLabel.text = restaurant.location
         case 3:
             cell.fieldLabel.text = "Been here"
-            cell.valueLabel.text = (restaurant.isVisited) ? "Yes, I've been here before" : "NO"
+            cell.valueLabel.text = (restaurant.isVisited) ? "Yes, I've been here before. \(restaurant.rating)" : "NO"
         default:
             cell.fieldLabel.text = ""
             cell.valueLabel.text = ""
