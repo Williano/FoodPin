@@ -50,7 +50,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8k-ID-C8v">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8k-ID-C8v">
                                                             <rect key="frame" x="0.0" y="21.5" width="55" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -94,7 +94,7 @@
             </objects>
             <point key="canvasLocation" x="1052" y="158.77061469265368"/>
         </scene>
-        <!--Restaurant Detail View Controller-->
+        <!--Title-->
         <scene sceneID="aHz-4J-PPr">
             <objects>
                 <viewController id="FV5-zo-8q2" customClass="RestaurantDetailViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
@@ -118,16 +118,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkY-3b-vEV">
-                                                    <rect key="frame" x="15" y="7.5" width="360" height="20.5"/>
+                                                    <rect key="frame" x="15" y="7" width="360" height="21.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="261" verticalHuggingPriority="251" text="Field " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rE8-cY-kwK">
-                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ezi-Sy-gCa">
-                                                            <rect key="frame" x="120" y="0.0" width="240" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ezi-Sy-gCa">
+                                                            <rect key="frame" x="120" y="0.0" width="240" height="21.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -140,8 +140,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="lkY-3b-vEV" firstAttribute="centerY" secondItem="ZFh-hU-4LS" secondAttribute="centerY" id="5NW-JF-J9G"/>
+                                                <constraint firstItem="lkY-3b-vEV" firstAttribute="top" secondItem="ZFh-hU-4LS" secondAttribute="top" constant="7" id="HHh-Nk-6CG"/>
                                                 <constraint firstAttribute="trailing" secondItem="lkY-3b-vEV" secondAttribute="trailing" id="ThJ-wz-upx"/>
                                                 <constraint firstItem="lkY-3b-vEV" firstAttribute="leading" secondItem="ZFh-hU-4LS" secondAttribute="leading" constant="15" id="W87-AR-oBF"/>
+                                                <constraint firstAttribute="bottom" secondItem="lkY-3b-vEV" secondAttribute="bottom" constant="7" id="y90-Jc-vIZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -165,6 +167,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fIf-1C-ciW"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="h9s-Wh-Gy7"/>
                     <connections>
                         <outlet property="restaurantImageView" destination="Cbx-9s-wq2" id="sCW-L6-dQU"/>
                         <outlet property="tableView" destination="bYK-qh-Edo" id="yIF-wK-OrC"/>
@@ -179,9 +182,18 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HbA-ly-9jY" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EXX-u1-eE5">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EXX-u1-eE5">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.84705882352941175" green="0.29019607843137252" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="24"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
