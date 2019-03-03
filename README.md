@@ -12,4 +12,4 @@ While Yelp is good, this app helps users to create a personal food guide.
 
 
 ## Screenshots
-<img width="500" height="500" alt="home screen" src="https://user-images.githubusercontent.com/19711677/53697711-0bacaf80-3dcc-11e9-8fd3-0d762480a7c6.png">
+<img  alt="home screen" src="https://user-images.githubusercontent.com/19711677/53697711-0bacaf80-3dcc-11e9-8fd3-0d762480a7c6.png">
