@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 class RestaurantDetailViewController: UIViewController {
     @IBOutlet var restaurantImageView: UIImageView!
     @IBOutlet var tableView:UITableView!
+    @IBOutlet var mapView:MKMapView!
     
     var restaurant:Restaurant!
 
@@ -20,13 +22,44 @@ class RestaurantDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         title = restaurant.name
         
+        // Enable self sizing cells
         tableView.estimatedRowHeight = 36.0
         tableView.rowHeight = UITableView.automaticDimension
             
         tableView.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/250.0, alpha: 0.2)
           tableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/250.0, alpha: 0.8)
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
+//        tableView.tableFooterView = UIView(frame: CGRect.zero)
         restaurantImageView.image = UIImage(named: restaurant.image)
+        
+        // Handle tap gesture for the map view
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showMap))
+        mapView.addGestureRecognizer(tapGestureRecognizer)
+        
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(restaurant.location) { (placemarks, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let placemarks = placemarks else {return}
+            // Get first placemarker
+            let placemark = placemarks[0]
+            
+            // Add anotation
+            let annotation = MKPointAnnotation()
+            
+            guard let location = placemark.location else {return}
+            
+            // Display the annotation
+            annotation.coordinate = location.coordinate
+            self.mapView.addAnnotation(annotation)
+            
+            // Set the zoom level
+            let region = MKCoordinateRegion.init(center: annotation.coordinate, latitudinalMeters: 250, longitudinalMeters: 250)
+            self.mapView.setRegion(region, animated: false)
+        }
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +68,11 @@ class RestaurantDetailViewController: UIViewController {
 //        navigationController?.hidesBarsOnSwipe = false
 //        navigationController?.setNavigationBarHidden(false, animated: true)
 //    }
+    
+    // MARK: - Custom methods
+    @objc func showMap() {
+        performSegue(withIdentifier: "showMap", sender: self)
+    }
 
     
     // MARK: - Navigation
@@ -42,9 +80,13 @@ class RestaurantDetailViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        if segue.identifier == segue.identifier {
+        if segue.identifier == "showReview" {
             let destinationController = segue.destination as! ReviewViewController
               // Pass the selected object to the new view controller.
+            destinationController.restaurant = restaurant
+        } else if segue.identifier == "showMap" {
+            let destinationController = segue.destination as! MapViewController
+            // Pass the selected object to the new view controller.
             destinationController.restaurant = restaurant
         }
     }
@@ -71,7 +113,7 @@ class RestaurantDetailViewController: UIViewController {
         
         tableView.reloadData()
     }
-
+    
 }
 
 

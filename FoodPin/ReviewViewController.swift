@@ -37,11 +37,11 @@ class ReviewViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         closeReviewButton.transform = CGAffineTransform(translationX: 1000, y: 0)
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 1.5) {
             self.containerView.transform = CGAffineTransform.identity
         }
         
-        UIView.animate(withDuration: 1.0) {
+        UIView.animate(withDuration: 2.0) {
             self.closeReviewButton.transform = CGAffineTransform.identity
         }
 //        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.3,
