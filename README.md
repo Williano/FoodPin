@@ -9,3 +9,7 @@ While Yelp is good, this app helps users to create a personal food guide.
 - Save the restaurant locally and share it with other foodies in the world
 - Show the location of a restaurant on maps
 - View restaurants shared by other foodies
+
+
+## Screenshots
+<img  alt="home screen" src="https://user-images.githubusercontent.com/19711677/53697711-0bacaf80-3dcc-11e9-8fd3-0d762480a7c6.png">
