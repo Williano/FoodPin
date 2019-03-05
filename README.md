@@ -17,11 +17,14 @@ While Yelp is good, this app helps users to create a personal food guide.
 
 ![home](https://user-images.githubusercontent.com/19711677/53804145-9c0b0180-3f3e-11e9-8646-e24e9aca8dc8.png)
 
-- Restaurant Details
-![restaurant detail](https://user-images.githubusercontent.com/19711677/53802543-f5bcfd00-3f39-11e9-85ab-9c9a50c09036.PNG)
+- Restaurant Detail
+
+![restaurant detail](https://user-images.githubusercontent.com/19711677/53804434-66b2e380-3f3f-11e9-9435-e4977e6cc906.png)
 
 - Restaurant Review
-![review](https://user-images.githubusercontent.com/19711677/53802539-f3f33980-3f39-11e9-827b-9872f0422ff7.PNG)
+
+![restaurant review](https://user-images.githubusercontent.com/19711677/53804436-674b7a00-3f3f-11e9-891b-c32338653323.png)
 
 - Restaurant Loaction
-![restaurant location](https://user-images.githubusercontent.com/19711677/53802541-f48bd000-3f39-11e9-90ab-db30890902a0.PNG)
+
+![restaurant loaction](https://user-images.githubusercontent.com/19711677/53804435-674b7a00-3f3f-11e9-9b37-ebe820a093bd.png)
