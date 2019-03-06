@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D151EF5223058E2002487C5 /* RouteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D151EF4223058E2002487C5 /* RouteTableViewController.swift */; };
 		3D3C22F422282C62008FA989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C22F322282C62008FA989 /* AppDelegate.swift */; };
 		3D3C22F922282C62008FA989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3C22F722282C62008FA989 /* Main.storyboard */; };
 		3D3C22FB22282C63008FA989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3C22FA22282C63008FA989 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D151EF4223058E2002487C5 /* RouteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewController.swift; sourceTree = "<group>"; };
 		3D3C22F022282C62008FA989 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3C22F322282C62008FA989 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D3C22F822282C62008FA989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				3D7C6800222AD3CC002C05C7 /* RestaurantDetailTableViewCell.swift */,
 				3DD9C3B7222C091700055619 /* ReviewViewController.swift */,
 				3DD9C3BC222D68AB00055619 /* MapViewController.swift */,
+				3D151EF4223058E2002487C5 /* RouteTableViewController.swift */,
 			);
 			path = FoodPin;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			files = (
 				3D7C67FF222AC13D002C05C7 /* Restaurant.swift in Sources */,
 				3D3C230622282F35008FA989 /* RestaurantTableViewController.swift in Sources */,
+				3D151EF5223058E2002487C5 /* RouteTableViewController.swift in Sources */,
 				3DD9C3B8222C091700055619 /* ReviewViewController.swift in Sources */,
 				3D3C2308222943C2008FA989 /* RestaurantTableViewCell.swift in Sources */,
 				3D7C6801222AD3CC002C05C7 /* RestaurantDetailTableViewCell.swift in Sources */,

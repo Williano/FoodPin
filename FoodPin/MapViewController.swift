@@ -12,11 +12,19 @@ import MapKit
 class MapViewController: UIViewController {
     
     @IBOutlet var mapView:MKMapView!
+    @IBOutlet var segementedControl:UISegmentedControl!
     
     var restaurant:Restaurant!
+    var currentTransportType = MKDirectionsTransportType.automobile
+    var currentRoute: MKRoute?
+    
+    let locationManager = CLLocationManager()
+    var currentplaceMark: CLPlacemark?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        segementedControl.isHidden = true
         
         mapView.delegate = self
         mapView.showsCompass = true
@@ -25,6 +33,13 @@ class MapViewController: UIViewController {
         mapView.showsBuildings = true
 
         // Do any additional setup after loading the view.
+        // Request for a user's authorization for location services.
+        locationManager.requestWhenInUseAuthorization()
+        let status = CLLocationManager.authorizationStatus()
+        
+        if status == CLAuthorizationStatus.authorizedWhenInUse {
+            mapView.showsUserLocation = true
+        }
         
         // Convert address to coordinate and annotate it on map.
         let gecoder = CLGeocoder()
@@ -37,6 +52,7 @@ class MapViewController: UIViewController {
             guard let placemarks = placemarks else{return}
             // Get the first placemark
             let placemark = placemarks[0]
+            self.currentplaceMark = placemark
             
             // Add annotation
             let annotation = MKPointAnnotation()
@@ -56,15 +72,72 @@ class MapViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "showSteps" {
+            // Get the new view controller using segue.destination.
+            let routeTableViewController = segue.destination.children[0] as! RouteTableViewController
+            guard let steps = currentRoute?.steps else {return}
+           // Pass the selected object to the new view controller.
+            routeTableViewController.routeSteps = steps
+         }
     }
-    */
+    
+    
+    @IBAction func showDirection(sender: AnyObject) {
+        
+        switch segementedControl.selectedSegmentIndex {
+        case 0:
+            currentTransportType = MKDirectionsTransportType.automobile
+        case 1:
+            currentTransportType = MKDirectionsTransportType.walking
+        default:
+            break
+        }
+        
+        segementedControl.isHidden = false
+        
+        guard let currentplaceMark = currentplaceMark else {
+            return
+        }
+        
+        let directionRequest = MKDirections.Request()
+        
+        // Set the source and the destination of the route
+        directionRequest.source = MKMapItem.forCurrentLocation()
+        let destinationPlacemark = MKPlacemark(placemark: currentplaceMark)
+        directionRequest.destination = MKMapItem(placemark: destinationPlacemark)
+        directionRequest.transportType = currentTransportType
+        
+        // Calculate the direction
+        let directions = MKDirections(request: directionRequest)
+        
+        directions.calculate { (routeResponse, routeError) -> Void in
+            guard let routeResponse = routeResponse else {
+                if let routeError = routeError {
+                    print("Error: \(routeError)")
+                }
+                 return
+            }
+            
+            let route = routeResponse.routes[0]
+            self.currentRoute = route
+            self.mapView.removeOverlays(self.mapView.overlays)
+            self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.aboveRoads)
+            
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+        }
+    }
+    
+    @IBAction func mapTypeChanged(_ sender: UISegmentedControl) {
+        mapView.mapType = MKMapType.init(rawValue: UInt(sender.selectedSegmentIndex)) ?? .standard
+    }
+    
 
 }
 
@@ -93,7 +166,20 @@ extension MapViewController: MKMapViewDelegate {
         // Customize pin tint color
         annotationView?.pinTintColor = UIColor.orange
         
+        annotationView?.rightCalloutAccessoryView = UIButton(type: UIButton.ButtonType.detailDisclosure)
         
         return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = (currentTransportType == .automobile) ? UIColor.blue : UIColor.orange
+        renderer.lineWidth = 3.0
+        
+        return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        performSegue(withIdentifier: "showSteps", sender: view)
     }
 }
