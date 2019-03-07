@@ -16,7 +16,9 @@ class RouteTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableView.automaticDimension
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,10 +40,10 @@ class RouteTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RouteTableViewCell
 
         // Configure the cell...
-        cell.textLabel?.text = routeSteps[indexPath.row].instructions
+        cell.routeStepLabel.text = routeSteps[indexPath.row].instructions
 
         return cell
     }

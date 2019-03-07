@@ -134,8 +134,45 @@ class MapViewController: UIViewController {
         }
     }
     
+    
+    // MARK: Custom actions
+    
     @IBAction func mapTypeChanged(_ sender: UISegmentedControl) {
         mapView.mapType = MKMapType.init(rawValue: UInt(sender.selectedSegmentIndex)) ?? .standard
+    }
+    
+    @IBAction func showNearby(sender: UIButton) {
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = restaurant.type
+        searchRequest.region = mapView.region
+        
+        let localSearch = MKLocalSearch(request: searchRequest)
+        localSearch.start { (response, error) -> Void in
+            guard let response = response else {
+                if let error = error {
+                    print(error)
+                }
+                
+                return
+            }
+            
+            let mapItems = response.mapItems
+            var nearbyAnnotations: [MKAnnotation] = []
+            if mapItems.count > 0 {
+                for item in mapItems {
+                    // Add annotation
+                    let annotation = MKPointAnnotation()
+                    annotation.title = item.name
+                    annotation.subtitle = item.phoneNumber
+                    if let location = item.placemark.location {
+                        annotation.coordinate = location.coordinate
+                    }
+                    nearbyAnnotations.append(annotation)
+                }
+            }
+            
+            self.mapView.showAnnotations(nearbyAnnotations, animated: true)
+        }
     }
     
 
@@ -159,13 +196,26 @@ extension MapViewController: MKMapViewDelegate {
             annotationView?.canShowCallout = true
         }
         
+        guard let currentPlacemarkCoordinate = currentplaceMark?.location?.coordinate else {return nil}
+        
+        if currentPlacemarkCoordinate.latitude == annotation.coordinate.latitude && currentPlacemarkCoordinate.longitude == annotation.coordinate.longitude {
+        
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
         leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView
         
-        // Customize pin tint color
-        annotationView?.pinTintColor = UIColor.orange
+            // Pin color customization
+            if #available(iOS 9.0, *) {
+                annotationView?.pinTintColor = UIColor.orange
+            }
+        } else {
+            // Pin color customization
+            if #available(iOS 9.0, *) {
+                annotationView?.pinTintColor = UIColor.red
+            }
         
+            
+        }
         annotationView?.rightCalloutAccessoryView = UIButton(type: UIButton.ButtonType.detailDisclosure)
         
         return annotationView

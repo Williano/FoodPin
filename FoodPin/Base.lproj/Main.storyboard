@@ -375,6 +375,9 @@
                                 <state key="normal" title="Nearby">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="showNearbyWithSender:" destination="oTC-LE-Y60" eventType="touchUpInside" id="JAn-bx-BYI"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VjA-Rf-pxR">
                                 <rect key="frame" x="234" y="619" width="125" height="29"/>
@@ -436,18 +439,35 @@
         <scene sceneID="g0j-MH-1vy">
             <objects>
                 <tableViewController id="akX-zw-KoZ" customClass="RouteTableViewController" customModule="FoodPin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UcU-VR-tOo">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UcU-VR-tOo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="mB4-o4-zvg">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="mB4-o4-zvg" customClass="RouteTableViewCell" customModule="FoodPin" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mB4-o4-zvg" id="nwN-wS-jPz">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="routeStep" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHb-GY-SKW">
+                                            <rect key="frame" x="16" y="10.5" width="75.5" height="22.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YHb-GY-SKW" secondAttribute="trailing" constant="20" symbolic="YES" id="Pfa-Fc-r0a"/>
+                                        <constraint firstItem="YHb-GY-SKW" firstAttribute="centerY" secondItem="nwN-wS-jPz" secondAttribute="centerY" id="aMR-mE-Jhb"/>
+                                        <constraint firstItem="YHb-GY-SKW" firstAttribute="leading" secondItem="nwN-wS-jPz" secondAttribute="leadingMargin" id="rX4-uW-Ems"/>
+                                        <constraint firstItem="YHb-GY-SKW" firstAttribute="bottom" secondItem="nwN-wS-jPz" secondAttribute="bottomMargin" id="t8M-8H-3L1"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="routeStepLabel" destination="YHb-GY-SKW" id="THB-IG-Lde"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
