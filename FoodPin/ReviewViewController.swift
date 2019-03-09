@@ -15,14 +15,14 @@ class ReviewViewController: UIViewController {
     @IBOutlet var restaurantImageView: UIImageView!
     @IBOutlet var closeReviewButton: UIButton!
     
-    var restaurant: Restaurant!
+    var restaurant: RestaurantMO!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        backgroundImageView.image? = UIImage(named: restaurant.image)!
-        restaurantImageView.image? = UIImage(named: restaurant.image)!
+        backgroundImageView.image = UIImage(data: restaurant.image as! Data)
+        restaurantImageView.image = UIImage(data: restaurant.image as! Data)
         
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

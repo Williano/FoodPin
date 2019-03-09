@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+
 
 class AddRestaurantTableViewController: UITableViewController {
     
@@ -14,9 +16,14 @@ class AddRestaurantTableViewController: UITableViewController {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var typeTextField: UITextField!
     @IBOutlet var locationTextField: UITextField!
+    @IBOutlet var phoneTextField: UITextField!
     @IBOutlet var yesButton: UIButton!
     @IBOutlet var noButton: UIButton!
+    
+    var restaurant:RestaurantMO!
 
+    var isVisited = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +32,7 @@ class AddRestaurantTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.tableFooterView = UIView(frame: .zero)
     }
 
     // MARK: - Table view data source
@@ -83,7 +91,64 @@ class AddRestaurantTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Custom actions
 
+    @IBAction func saveRestaurant(_ sender: Any) {
+        
+        if nameTextField.text == "" || typeTextField.text == "" || locationTextField.text == ""  || phoneTextField.text == "" {
+            let alertController = UIAlertController(title: "Oops", message: "We can't proceed because one of the fields is blank. Please note that all fields are required.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            
+            return
+        }
+        
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            restaurant = RestaurantMO(context: appDelegate.persistentContainer.viewContext)
+            restaurant.name = nameTextField.text
+            restaurant.type = typeTextField.text
+            restaurant.location = locationTextField.text
+            restaurant.phone = phoneTextField.text
+            restaurant.isVisited = isVisited
+            
+            if let restaurantImage = photoImageView.image {
+                if let imageData = restaurantImage.pngData() {
+                    restaurant.image = NSData(data: imageData) as Data
+                }
+            }
+            
+            print("Saving data to context ...")
+            appDelegate.saveContext()
+            
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func toggleBeenHereButton(sender: UIButton) {
+        // Yes button clicked
+        if sender == yesButton {
+            isVisited = true
+            
+            // Change the backgroundColor property of yesButton to red
+            yesButton.backgroundColor = UIColor(red: 218.0/255.0, green: 100.0/255.0, blue: 70.0/255.0, alpha: 1.0)
+            
+            // Change the backgroundColor property of noButton to gray
+            noButton.backgroundColor = UIColor(red: 218.0/255.0, green: 223.0/255.0, blue: 225.0/255.0, alpha: 1.0)
+            
+        } else if sender == noButton {
+            isVisited = false
+            
+            // Change the backgroundColor property of yesButton to gray
+            yesButton.backgroundColor = UIColor(red: 218.0/255.0, green: 223.0/255.0, blue: 225.0/255.0, alpha: 1.0)
+            
+            // Change the backgroundColor property of noButton to red
+            noButton.backgroundColor = UIColor(red: 218.0/255.0, green: 100.0/255.0, blue: 70.0/255.0, alpha: 1.0)
+        }
+    }
+    
 }
 
 

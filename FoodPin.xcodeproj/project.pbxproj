@@ -10,6 +10,7 @@
 		3D151EF5223058E2002487C5 /* RouteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D151EF4223058E2002487C5 /* RouteTableViewController.swift */; };
 		3D151EF7223127DA002487C5 /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D151EF6223127DA002487C5 /* RouteTableViewCell.swift */; };
 		3D151EF9223288F3002487C5 /* AddRestaurantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D151EF8223288F3002487C5 /* AddRestaurantTableViewController.swift */; };
+		3D151F1D2232D08D002487C5 /* FoodPin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D151F1B2232D08D002487C5 /* FoodPin.xcdatamodeld */; };
 		3D3C22F422282C62008FA989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3C22F322282C62008FA989 /* AppDelegate.swift */; };
 		3D3C22F922282C62008FA989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D3C22F722282C62008FA989 /* Main.storyboard */; };
 		3D3C22FB22282C63008FA989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D3C22FA22282C63008FA989 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		3D151EF4223058E2002487C5 /* RouteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewController.swift; sourceTree = "<group>"; };
 		3D151EF6223127DA002487C5 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		3D151EF8223288F3002487C5 /* AddRestaurantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRestaurantTableViewController.swift; sourceTree = "<group>"; };
+		3D151F1C2232D08D002487C5 /* FoodPin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodPin.xcdatamodel; sourceTree = "<group>"; };
 		3D3C22F022282C62008FA989 /* FoodPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3C22F322282C62008FA989 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D3C22F822282C62008FA989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				3D151EF4223058E2002487C5 /* RouteTableViewController.swift */,
 				3D151EF6223127DA002487C5 /* RouteTableViewCell.swift */,
 				3D151EF8223288F3002487C5 /* AddRestaurantTableViewController.swift */,
+				3D151F1B2232D08D002487C5 /* FoodPin.xcdatamodeld */,
 			);
 			path = FoodPin;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 				3D7C67FD222AA77E002C05C7 /* RestaurantDetailViewController.swift in Sources */,
 				3D3C22F422282C62008FA989 /* AppDelegate.swift in Sources */,
 				3DD9C3BD222D68AB00055619 /* MapViewController.swift in Sources */,
+				3D151F1D2232D08D002487C5 /* FoodPin.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +393,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3D151F1B2232D08D002487C5 /* FoodPin.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3D151F1C2232D08D002487C5 /* FoodPin.xcdatamodel */,
+			);
+			currentVersion = 3D151F1C2232D08D002487C5 /* FoodPin.xcdatamodel */;
+			path = FoodPin.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3D3C22E822282C62008FA989 /* Project object */;
 }

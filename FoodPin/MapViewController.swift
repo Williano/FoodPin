@@ -14,7 +14,7 @@ class MapViewController: UIViewController {
     @IBOutlet var mapView:MKMapView!
     @IBOutlet var segementedControl:UISegmentedControl!
     
-    var restaurant:Restaurant!
+    var restaurant:RestaurantMO!
     var currentTransportType = MKDirectionsTransportType.automobile
     var currentRoute: MKRoute?
     
@@ -43,7 +43,7 @@ class MapViewController: UIViewController {
         
         // Convert address to coordinate and annotate it on map.
         let gecoder = CLGeocoder()
-        gecoder.geocodeAddressString(restaurant.location) { (placemarks, error) in
+        gecoder.geocodeAddressString(restaurant.location!) { (placemarks, error) in
             if let error = error {
                 print(error)
                 return
@@ -201,7 +201,7 @@ extension MapViewController: MKMapViewDelegate {
         if currentPlacemarkCoordinate.latitude == annotation.coordinate.latitude && currentPlacemarkCoordinate.longitude == annotation.coordinate.longitude {
         
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
-        leftIconView.image = UIImage(named: restaurant.image)
+            leftIconView.image = UIImage(data: restaurant.image as! Data)
         annotationView?.leftCalloutAccessoryView = leftIconView
         
             // Pin color customization
