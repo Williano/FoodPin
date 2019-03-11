@@ -64,6 +64,20 @@ class RestaurantTableViewController: UITableViewController {
 //        
 //        navigationController?.hidesBarsOnSwipe = true
 //    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        }
+        
+        if let pageViewController =
+            storyboard?.instantiateViewController(withIdentifier: "WalkthroughController")
+                as? WalkthroughPageViewController {
+            present(pageViewController, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -217,6 +231,7 @@ class RestaurantTableViewController: UITableViewController {
             let destinationController = segue.destination as! RestaurantDetailViewController
             // Pass the selected object to the new view controller.
             destinationController.restaurant = (searchController.isActive) ? searchResults[indexPath.row] : restaurants[indexPath.row]
+            searchController.isActive = false
         }
     }
     
