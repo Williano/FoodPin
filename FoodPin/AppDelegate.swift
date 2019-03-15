@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 
 @UIApplicationMain
@@ -23,6 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        guard let barFont = UIFont(name: "Avenir-Light", size: 24.0) else { return false}
 //        UINavigationBar.appearance().titleTextAttributes =
 //            [NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.font:barFont]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if granted {
+                print("User notifications are allowed.")} else {
+                print("User notifications are not allowed.")
+            }
+        }
         
         return true
     }
